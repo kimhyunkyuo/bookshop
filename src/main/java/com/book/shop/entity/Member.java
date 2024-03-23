@@ -3,14 +3,14 @@ package com.book.shop.entity;
 import com.book.shop.constant.Role;
 import com.book.shop.dto.MemberFormDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.lang.model.element.Name;
+
 
 @Entity
 @Table(name = "member")
@@ -48,7 +48,7 @@ public class Member {
         member.setStreetadr(memberFormDto.getStreetadr());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
         return member;
     }
 
