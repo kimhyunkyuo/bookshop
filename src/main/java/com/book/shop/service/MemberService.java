@@ -3,12 +3,16 @@ package com.book.shop.service;
 import com.book.shop.entity.Member;
 import com.book.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -31,6 +35,8 @@ public class MemberService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
         Member member = memberRepository.findByEmail(email);
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
         if(member == null){
             throw  new UsernameNotFoundException(email);
