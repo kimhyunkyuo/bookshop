@@ -34,7 +34,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.formLogin((formLogin) -> formLogin
+
+
+        http.
+                formLogin((formLogin) -> formLogin
                         .usernameParameter("email") // 로그인 시 사용할 파라미터로 email 사용
                         .failureUrl("/members/login/error") // 로그인 실패시 이동할 페이지
                         .loginPage("/members/login") // 로그인 페이지 설정
@@ -51,15 +54,22 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(principalOauth2UserService))
                 );
 
-        http.authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                .requestMatchers("/", "/members/**", "/item/**", "/images/**", "/shoppingmall/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                       .requestMatchers("/", "/members/**", "/item/**", "/images/**", "/shop/**", "/mail/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+
+
         );
         http.exceptionHandling(authenticationManager -> authenticationManager
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
+        http
+                .csrf((csrf) -> csrf
+                .ignoringRequestMatchers("/mail/**")
+        );
 
 
         return http.build();

@@ -2,6 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <title>회원가입</title>
+</head>
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
@@ -14,8 +24,46 @@
 
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
-
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript">
+          function sendNumber(){
+            $("#mail_number").css("display","block");
+            $.ajax({
+                url: "/mail",
+                type: "post",
+                dataType: "json",
+                data: {"mail" : $("#mail").val()},
+                success: function(data){
+                    alert("인증번호 발송");
+                    $("#Confirm").attr("value",data);
+                },
+                error:function(request, status, error) {
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+        });
+        }
+        function confirmNumber(){
+            var number1 = $("#number").val();
+            var number2 = $("#Confirm").val();
+            const $resultMsg = $('#mail-check-warn');
+
+            if(number1 === undefined || number1 === null || number1 === ''){
+                alert("인증 번호를 입력해주세요.")
+            }
+            if(number1 == number2 && number1 !== null && number1 !== ''){
+                $resultMsg.html('인증 성공');
+                $resultMsg.css('color','green');
+                isCertification = true;
+            }else{
+                $resultMsg.html('인증번호 불일치');
+                $resultMsg.css('color','red');
+                isCertification = false;
+            }
+        }
+    </script>
+
     <script>
         function execPostCode() {
             new daum.Postcode({
@@ -84,9 +132,21 @@
         </div>
         <div class="form-group">
             <label th:for="email">이메일주소</label>
-            <input type="email" th:field="*{email}" class="form-control" placeholder="이메일을 입력해주세요">
+            <input type="email" th:field="*{email}"  name="mail" id="mail" class="form-control" placeholder="이메일을 입력해주세요">
             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
         </div>
+        <div class="form-group">
+            <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호 전송</button>
+        </div>
+        <br>
+        <div class="form-group" id="mail_number" name="mail_number">
+            <input type="text" name="number" id="number" class="form-control" style="width:250px; margin-top: -10px" placeholder="인증번호 입력">
+            <span id="mail-check-warn"></span>
+            <button type="button" name="confirmBtn" id="confirmBtn" style="margin-top: 20px" onclick="confirmNumber()">이메일 인증</button>
+            <br>
+            <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+        </div>
+
         <div class="form-group">
             <label th:for="password">비밀번호</label>
             <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호 입력">
