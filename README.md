@@ -1,5 +1,5 @@
 # 쇼핑몰 프로젝트
-  스프링부트와 JPA,security를 이용하여 구현한 책 온라인 쇼핑몰 프로젝 
+  스프링부트와 JPA, security를 이용하여 구현한 책 온라인 쇼핑몰 프로젝트입니다.
  
 ## 개요
 - 프로젝트 명 : bookshop
@@ -17,7 +17,6 @@
 - SpringSecurity
 - Spring Data JPA
 - OAuth2.0
-- 
 #### BuildTool
 - Maven
 #### DataBase
