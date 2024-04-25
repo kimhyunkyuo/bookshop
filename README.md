@@ -11,20 +11,24 @@
    - spring-boot-starter-mail(라이브러리 사용)
 ## 사용기술
 ### #Back-End
-#### core
 - java  17
 - SpringBoot
 - Spring Security
 - Spring Data JPA
 - OAuth2.0
-#### BuildTool
-- Maven
-#### DataBase
-- MySQL
+
 ### #Front-End
 - JavaScript
 - BootStrap
 - Thymeleaf
+  
+#### BuildTool
+- Maven
+#### DataBase
+- MySQL
+#### API
+- Kakao 주소 API
+- Google 로그인 API
 
 ## 개발환경
 - IntelliJ
