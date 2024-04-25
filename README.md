@@ -14,7 +14,7 @@
 #### core
 - java  17
 - SpringBoot
-- SpringSecurity
+- Spring Security
 - Spring Data JPA
 - OAuth2.0
 #### BuildTool
@@ -30,10 +30,14 @@
 - IntelliJ
 - DBeaver
 - Github
----
+
+## ERD 다이어그램
+
+![스크린샷 2024-04-24 193229](https://github.com/kimhyunkyuo/bookshop/assets/131740127/2c3fc983-1de6-42d5-8424-36ff01d7a72b)
+
+
+## 실행영상
 [![Video Label](http://img.youtube.com/vi/qrJZxsNvKAE/0.jpg)](https://youtu.be/qrJZxsNvKAE?t=0s)
 
 
-[![Video Label](http://img.youtube.com/vi/'유튜브주소의id'/0.jpg)](https://youtu.be/'유튜브주소의id')
 
-https://youtu.be/qrJZxsNvKAE
