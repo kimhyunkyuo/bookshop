@@ -31,3 +31,9 @@
 - DBeaver
 - Github
 ---
+[![Video Label](http://img.youtube.com/vi/qrJZxsNvKAE/0.jpg)](https://youtu.be/qrJZxsNvKAE?t=0s)
+
+
+[![Video Label](http://img.youtube.com/vi/'유튜브주소의id'/0.jpg)](https://youtu.be/'유튜브주소의id')
+
+https://youtu.be/qrJZxsNvKAE
